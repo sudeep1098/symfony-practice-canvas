@@ -1,47 +1,14 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import axios from 'axios';
+import './interfaces/interface';
 
-interface Data {
-  name: string;
-  email: string;
-  country: string;
-}
-
-interface Response {
-  status: string;
-  message: string;
-  receivedData: Data;
-}
-
-interface Props {
-  link : string
-}
-
-interface NativeName {
-  common: string;
-  official: string;
-}
-
-interface Name {
-  common: string;
-  official: string;
-  nativeName: {
-    [key: string]: NativeName;
-  };
-}
-
-interface Country {
-  name: Name;
-  cca2: string;
-}
-
-const Home: React.FC<Props> = (props : Props) => {
-  const [data, setData] = useState<Data>({ name: '', email: '' , country: '' });
+const Home: React.FC<Props> = (props: Props) => {
+  const [data, setData] = useState<Data>({ name: '', email: '', country: '' });
   const [response, setResponse] = useState<Response | null>(null);
   const [loading, setLoading] = useState<Boolean>(false);
   const [countries, setCountries] = useState<Country[]>([]);
   const link = props.link;
-  
+
   useEffect(() => {
     const savedData = localStorage.getItem('formData');
     if (savedData) {
@@ -68,9 +35,9 @@ const Home: React.FC<Props> = (props : Props) => {
           'Content-Type': 'application/json',
         },
       });
-      setResponse(response.data);      
+      setResponse(response.data);
       localStorage.setItem('formData', JSON.stringify(data));
-      
+
     } catch (error) {
       console.error('There was an error!', error);
       setResponse(null);
@@ -80,12 +47,12 @@ const Home: React.FC<Props> = (props : Props) => {
   };
 
   const getCountry = async () => {
-    try{
+    try {
       const response = await axios.get('https://restcountries.com/v3.1/all');
       setCountries(response.data);
-    }catch(error){
+    } catch (error) {
       console.error(error);
-      
+
     }
   }
 

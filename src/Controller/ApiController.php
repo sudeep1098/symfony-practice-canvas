@@ -16,11 +16,11 @@ class ApiController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $response = [
-            'status' => 'success',
+            'statusMessage' => 'success',
             'message' => 'Data received successfully',
             'receivedData' => $data,
         ];
-        
+
         return new JsonResponse($response);
     }
 }
