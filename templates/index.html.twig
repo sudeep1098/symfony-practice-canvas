@@ -1,12 +1,13 @@
 {% extends "base.html.twig" %}
 {% block body %}
 {{ component('RandomNumber', { max: 500 }) }}
-<div id="product-editor-container" {{ react_component('home', {'fullName': 'Sudeep'}) }}>
+
+<div {{ react_component('home', {'link' : links.fetch_data }) }}>
     <div class="loading-product-editor">
         Initializing Admin Item Preview...
     </div>
 </div>
-{# <div {{ react_component('CustomSearch') }}></div>\ #}
+{# <div {{ react_component('home') }}></div> #}
 
 {# <div {{ stimulus_controller('hello', {attr: {"data-hello-index-value": 1}}) }}>
     <input data-hello-target="name" type="text">

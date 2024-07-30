@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class DefaultController extends AbstractController
@@ -18,7 +19,9 @@ class DefaultController extends AbstractController
     #[Route('/home', name: 'home')]
     public function index(Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('index.html.twig' );
+        return $this->render('index.html.twig' , ['links'=> [
+            'fetch_data' => $this->generateUrl('api_data', [], UrlGeneratorInterface::NETWORK_PATH),
+        ]]);
     }
 
     #[Route('/fraud', name: 'fraud')]
