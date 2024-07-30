@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block body %}
+{{ component('RandomNumber', { max: 500 }) }}
+<div id="product-editor-container" {{ react_component('home', {'fullName': 'Sudeep'}) }}>
+    <div class="loading-product-editor">
+        Initializing Admin Item Preview...
+    </div>
+</div>
+{# <div {{ react_component('CustomSearch') }}></div>\ #}
+
+{# <div {{ stimulus_controller('hello', {attr: {"data-hello-index-value": 1}}) }}>
+    <input data-hello-target="name" type="text">
+
+    <button data-action="click->hello#greet">
+        Greet
+    </button>
+
+    <span data-hello-target="output">
+    </span>
+
+    PIN: <input data-hello-target="source" type="text" value="3737" readonly>
+    <button data-action="hello#copy">Copy to Clipboard</button>
+
+    <button data-action="hello#previous"> ← </button>
+    <button data-action="hello#next"> → </button>
+
+    <div data-hello-target="slide">🐵</div>
+    <div data-hello-target="slide">🙈</div>
+    <div data-hello-target="slide">🙉</div>
+    <div data-hello-target="slide">🙊</div>
+</div>
+
+<div data-controller="content-loader" data-content-loader-url-value="{{ url("message") }}">
+<div class="loader" hidden>Loading...</div>
+</div> #}
+{% endblock %}
