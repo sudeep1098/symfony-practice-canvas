@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Canvas{% endblock %}
+{% block stylesheets %}
+	{{ encore_entry_link_tags('canvas') }}
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('canvas') }}
+{% endblock %}
+{% block body %}
+	<div class="example-wrapper">
+		<div {{react_component('Layout')}}></div>
+	</div>
+{% endblock %}
