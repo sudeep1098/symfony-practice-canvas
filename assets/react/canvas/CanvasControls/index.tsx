@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { Slider } from 'antd';
 import { fabric } from 'fabric';
 import CanvasContext from '@react/canvas/helper/context';
-import { Col, Row, Button } from 'antd';
+import { Col, Row, Button, ColorPicker, Select } from 'antd';
+import DrawingMode from './DrawingMode';
 
 const CanvasControls: React.FC = () => {
     const canvas = useContext(CanvasContext);
@@ -56,10 +57,8 @@ const CanvasControls: React.FC = () => {
         }
     };
     const drawingMode = () => {
-        if(canvas){
+        if (canvas) {
             canvas.isDrawingMode = !isDrawingMode;
-            console.log(canvas);
-            
         }
         setIsDrawingMode(!isDrawingMode);
     }
@@ -153,9 +152,12 @@ const CanvasControls: React.FC = () => {
                 <Col span={3}>
                     <Button onClick={canvasClear}>Clear</Button>
                 </Col>
-                <Col span={4}>
+                <Col span={6}>
                     <Button type="primary" onClick={drawingMode}>{!isDrawingMode ? "Enter Drawing Mode" : "Cancel Drawing Mode"}</Button>
                 </Col>
+                {isDrawingMode && (
+                    <DrawingMode />
+                )}
             </Row>
         </>
     );
