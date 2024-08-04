@@ -1,5 +1,5 @@
 import { deleteIcon, copyIcon } from "./icons";
-import { createControl, deleteObject, copyPaste } from "./utils";
+import { createControl, deleteObject, copyPaste } from './utils';
 
 export const buildControls = (fabric: any) => {
     fabric.Object.prototype.set({
@@ -19,8 +19,8 @@ export const buildControls = (fabric: any) => {
     const copyImg = new Image();
     copyImg.src = copyIcon;
 
-    const deleteControl = createControl(fabric, 24, deleteImg, deleteObject, 0.5, -0.5, 16);
-    const copyPasteControl = createControl(fabric, 24, copyImg, copyPaste, 0, -0.7, 10);
+    const deleteControl = createControl(24, deleteImg, deleteObject, 0.5, -0.5, 16);
+    const copyPasteControl = createControl(24, copyImg, copyPaste, 0, -0.7, 10);
 
     fabric.Object.prototype.controls.deleteControl = deleteControl;
     fabric.Object.prototype.controls.copyPasteControl = copyPasteControl;

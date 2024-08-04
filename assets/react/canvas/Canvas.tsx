@@ -1,4 +1,3 @@
-// Canvas.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { fabric } from './helper/fabric';
 import CanvasControls from './CanvasControls/index';
@@ -23,7 +22,7 @@ const Canvas: React.FC = () => {
             });
             fabric.Image.fromURL('https://picsum.photos/seed/picsum/200/300', function (img) {
                 img.scale(0.5).set('flipX', true);
-                img.set({left: 100, top: 100});
+                img.set({ left: 100, top: 100 });
                 canvas.add(img);
             });
 

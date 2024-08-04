@@ -32,6 +32,7 @@
     "dependencies": {
         "@ant-design/icons": "^5.4.0",
         "@babel/preset-react": "^7.24.7",
+        "@types/bootstrap": "^5.2.10",
         "@types/fabric": "^5.3.8",
         "@types/jquery": "^3.5.30",
         "antd": "^5.19.3",
