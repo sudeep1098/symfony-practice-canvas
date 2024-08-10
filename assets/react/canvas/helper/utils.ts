@@ -175,3 +175,85 @@ export const handleBrushChange = (canvas: fabric.Canvas, value: string) => {
     }
 };
 
+export const addRectangle = (canvas: fabric.Canvas) => {
+    const shiftAmount = 10;
+
+    const numRectangles = canvas.getObjects('rect').length;
+    
+    const left = 100 + numRectangles * shiftAmount;
+    const top = 50 + numRectangles * shiftAmount;
+
+    const rect = new fabric.Rect({
+        left: left,
+        top: top,
+        fill: 'red',
+        width: 200,
+        height: 100,
+    });
+
+    canvas.add(rect);
+    canvas.setActiveObject(rect);
+    canvas.requestRenderAll();
+};
+
+export const addCircle = (canvas: fabric.Canvas) => {
+    const shiftAmount = 10;
+
+    const numCircles = canvas.getObjects('circle').length;
+
+    const left = 100 + numCircles * shiftAmount;
+    const top = 50 + numCircles * shiftAmount;
+
+    const circle = new fabric.Circle({
+        left: left,
+        top: top,
+        radius: 50,
+        fill: 'blue',
+    });
+
+    canvas.add(circle);
+    canvas.setActiveObject(circle);
+    canvas.requestRenderAll();
+};
+
+export const addTriangle = (canvas: fabric.Canvas) => {
+    const shiftAmount = 10;
+
+    const numTriangles = canvas.getObjects('triangle').length;
+
+    const left = 100 + numTriangles * shiftAmount;
+    const top = 50 + numTriangles * shiftAmount;
+
+    const triangle = new fabric.Triangle({
+        left: left,
+        top: top,
+        width: 100,
+        height: 100,
+        fill: 'green',
+    });
+
+    canvas.add(triangle);
+    canvas.setActiveObject(triangle);
+    canvas.requestRenderAll();
+};
+
+export const addEllipse = (canvas: fabric.Canvas) => {
+    const shiftAmount = 10;
+
+    const numEllipses = canvas.getObjects('ellipse').length;
+
+    const left = 100 + numEllipses * shiftAmount;
+    const top = 50 + numEllipses * shiftAmount;
+
+    const ellipse = new fabric.Ellipse({
+        left: left,
+        top: top,
+        rx: 100,
+        ry: 50,
+        fill: 'purple',
+    });
+
+    canvas.add(ellipse);
+    canvas.setActiveObject(ellipse);
+    canvas.requestRenderAll();
+};

@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { Slider } from 'antd';
 import { fabric } from 'fabric';
 import CanvasContext from '@react/canvas/helper/context';
-import { Col, Row, Button, ColorPicker, Select } from 'antd';
+import { Col, Row, Button } from 'antd';
 import DrawingMode from './DrawingMode';
+import Shapes from './Shapes';
 
 const CanvasControls: React.FC = () => {
     const canvas = useContext(CanvasContext);
@@ -158,6 +159,7 @@ const CanvasControls: React.FC = () => {
                 {isDrawingMode && (
                     <DrawingMode />
                 )}
+                <Shapes/>
             </Row>
         </>
     );
