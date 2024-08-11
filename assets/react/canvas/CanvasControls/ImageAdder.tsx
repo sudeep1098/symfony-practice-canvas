@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { fabric } from '@react/canvas/helper/fabric';
 import CanvasContext from '../helper/context';
-import { addImageToCanvas } from '../helper/utils';
-import { Button } from 'antd';
+import { addImageToCanvas, addSVGToCanvas } from '../helper/utils';
+import { Button, Col, Row } from 'antd';
+import { deleteIcon } from '../helper/icons';
 
 const ImageAdder: React.FC = () => {
     const canvas = useContext(CanvasContext);
@@ -16,8 +17,24 @@ const ImageAdder: React.FC = () => {
         }
     };
 
+    const handleAddSVG = () => {
+        if (canvas instanceof fabric.Canvas) {
+            addSVGToCanvas(canvas, deleteIcon, {
+                scaleX: 0.3,
+                scaleY: 0.3,
+            });
+        }
+    };
+
     return (
-        <Button onClick={handleAddImage}>Add Image</Button>
+        <Row gutter={[8,8]}>
+        <Col>
+            <Button onClick={handleAddImage}>Add Image</Button>
+        </Col>
+        <Col>
+            <Button onClick={handleAddSVG}>Add SVG</Button>
+        </Col>
+        </Row>
     );
 };
 

@@ -53,15 +53,15 @@ const Canvas: React.FC = () => {
 
     return (
         <Row justify={'center'} className='p-2'>
-            <Col span={10}>
+            <Col sm={24} md={24} xl={12} className='d-flex justify-content-center mb-3 mb-md-0'>
                 <canvas
                     id="canvas"
-                    width="500"
+                    width="600"
                     height="400"
-                    style={{ border: '1px solid #000000' }}
+                    style={{ border: '2px dashed #000000' }}
                 />
             </Col>
-            <Col span={12}>
+            <Col  sm={24} md={20} xl={12}>
                 {fabricCanvas && (
                     <CanvasContext.Provider value={fabricCanvas}>
                         <CanvasControls />

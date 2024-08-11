@@ -1,4 +1,5 @@
 import { fabric } from "@react/canvas/helper/fabric";
+import './interface';
 
 export function renderIcon(
     ctx: CanvasRenderingContext2D,
@@ -261,17 +262,7 @@ export const addEllipse = (canvas: fabric.Canvas) => {
 export const addImageToCanvas = (
     canvas: fabric.Canvas,
     url: string,
-    options: {
-        scaleX?: number;
-        scaleY?: number;
-        flipX?: boolean;
-        flipY?: boolean;
-        left?: number;
-        top?: number;
-        angle?: number;
-        opacity?: number;
-        [key: string]: any;
-    } = {}
+    options: Image_svg_options = {}
 ) => {
     const shiftAmount = 10;
     const numImages = canvas.getObjects('image').length;
@@ -293,6 +284,39 @@ export const addImageToCanvas = (
 
         canvas.add(img);
         canvas.setActiveObject(img);
+        canvas.requestRenderAll();
+    });
+};
+
+export const addSVGToCanvas = (
+    canvas: fabric.Canvas,
+    url: string,
+    options: Image_svg_options = {}
+) => {
+    const shiftAmount = 10;
+    const numSVGs = canvas.getObjects('group').length;
+    const left = 100 + numSVGs * shiftAmount;
+    const top = 50 + numSVGs * shiftAmount;
+    console.log(canvas.getObjects('group'));
+    
+
+    fabric.loadSVGFromURL(url, (objects, svgOptions) => {
+        const shape = fabric.util.groupSVGElements(objects, svgOptions);
+
+        shape.set({
+            scaleX: options.scaleX || 1,
+            scaleY: options.scaleY || 1,
+            flipX: options.flipX || false,
+            flipY: options.flipY || false,
+            left: options.left || left,
+            top: options.top || top,
+            angle: options.angle || 0,
+            opacity: options.opacity || 1,
+            ...options
+        });
+
+        canvas.add(shape);
+        canvas.setActiveObject(shape);
         canvas.requestRenderAll();
     });
 };

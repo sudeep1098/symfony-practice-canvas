@@ -105,17 +105,15 @@ const CanvasControls: React.FC = () => {
 
     return (
         <>
-            <Row justify={'center'}>
+            <Row justify={'center'} gutter={[8,8]}>
                 <ControlSliders controls={controls} onControlChange={handleControlChange} disabled={!activeObject} />
-                <Col span={3}>
+                <Col>
                     <Button onClick={canvasClear}>Clear</Button>
                 </Col>
                 <Col>
                     <Shapes />
                 </Col>
-                <Col className='ms-2' span={4}>
-                    <ImageAdder />
-                </Col>
+                <ImageAdder />
                 <Col className='mt-3' span={12}>
                     <TextAdder />
                 </Col>
