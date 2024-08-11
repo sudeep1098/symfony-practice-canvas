@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { Slider, Button, Col, Row } from 'antd';
-import { fabric } from 'fabric';
+import { Button, Col, Row } from 'antd';
+import { fabric } from '@react/canvas/helper/fabric';
 import CanvasContext from '@react/canvas/helper/context';
 import DrawingMode from './DrawingMode';
 import Shapes from './Shapes';
 import ImageAdder from './ImageAdder';
 import TextAdder from './TextAdder';
+import ControlSliders from './ControlSliders';
 
 const CanvasControls: React.FC = () => {
     const canvas = useContext(CanvasContext);
@@ -102,67 +103,7 @@ const CanvasControls: React.FC = () => {
     return (
         <>
             <Row justify={'center'}>
-                <Col span={24}>
-                    <label>Angle:</label>
-                    <Slider
-                        value={controls.angle}
-                        min={0}
-                        max={360}
-                        onChange={(value) => handleControlChange('angle', value)}
-                        disabled={!activeObject}
-                    />
-                </Col>
-                <Col span={24}>
-                    <label>Scale:</label>
-                    <Slider
-                        value={controls.scale}
-                        min={0.1}
-                        max={3}
-                        step={0.1}
-                        onChange={(value) => handleControlChange('scale', value)}
-                        disabled={!activeObject}
-                    />
-                </Col>
-                <Col span={24}>
-                    <label>Top:</label>
-                    <Slider
-                        value={controls.top}
-                        min={0}
-                        max={600}
-                        onChange={(value) => handleControlChange('top', value)}
-                        disabled={!activeObject}
-                    />
-                </Col>
-                <Col span={24}>
-                    <label>Left:</label>
-                    <Slider
-                        value={controls.left}
-                        min={0}
-                        max={800}
-                        onChange={(value) => handleControlChange('left', value)}
-                        disabled={!activeObject}
-                    />
-                </Col>
-                <Col span={24}>
-                    <label>SkewX:</label>
-                    <Slider
-                        value={controls.skewX}
-                        min={0}
-                        max={100}
-                        onChange={(value) => handleControlChange('skewX', value)}
-                        disabled={!activeObject}
-                    />
-                </Col>
-                <Col span={24}>
-                    <label>SkewY:</label>
-                    <Slider
-                        value={controls.skewY}
-                        min={0}
-                        max={100}
-                        onChange={(value) => handleControlChange('skewY', value)}
-                        disabled={!activeObject}
-                    />
-                </Col>
+                <ControlSliders controls={controls} onControlChange={handleControlChange} disabled={!activeObject} />
                 <Col span={3}>
                     <Button onClick={canvasClear}>Clear</Button>
                 </Col>
