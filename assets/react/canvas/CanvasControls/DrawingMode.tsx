@@ -54,7 +54,7 @@ const DrawingMode: React.FC = () => {
                 <label>Color:</label>
                 <ColorPicker defaultValue="#000000" onChange={(value) => { handleColorChange(value) }} />
             </Col>
-            <Col span={12}>
+            <Col className='mt-1' span={12}>
                 <label>Mode:</label>
                 <Select
                     defaultValue="pencil"

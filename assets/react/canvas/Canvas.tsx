@@ -13,27 +13,19 @@ const Canvas: React.FC = () => {
             if (CanvasElement) {
                 const canvas = new fabric.Canvas(CanvasElement);
                 setFabricCanvas(canvas);
-
-                fabric.Image.fromURL('https://picsum.photos/seed/picsum/200/300', function (img) {
-                    img.scale(0.5).set('flipX', true);
-                    img.set({ left: 100, top: 100 });
-                    canvas.add(img);
-                });
-
                 canvas.renderAll();
-
-                console.log(canvas._objects);
+                console.log(canvas._objects, canvas.toJSON());
             }
         }
     }, [fabricCanvas]);
 
     return (
-        <Row justify={'center'}>
+        <Row justify={'center'} className='p-2'>
             <Col span={10}>
                 <canvas
                     id="canvas"
                     width="500"
-                    height="300"
+                    height="400"
                     style={{ border: '1px solid #000000' }}
                 />
             </Col>

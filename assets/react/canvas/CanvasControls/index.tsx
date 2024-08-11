@@ -5,6 +5,7 @@ import CanvasContext from '@react/canvas/helper/context';
 import { Col, Row, Button } from 'antd';
 import DrawingMode from './DrawingMode';
 import Shapes from './Shapes';
+import ImageAdder from './ImageAdder';
 
 const CanvasControls: React.FC = () => {
     const canvas = useContext(CanvasContext);
@@ -38,6 +39,8 @@ const CanvasControls: React.FC = () => {
     }, [canvas]);
 
     const handleControlChange = (property: any, value: number) => {
+        console.log(canvas._objects, canvas.toJSON(), canvas.toSVG());
+
         if (activeObject && canvas) {
             if (property === 'scale') {
                 activeObject.set({
@@ -88,7 +91,7 @@ const CanvasControls: React.FC = () => {
 
     return (
         <>
-            <Row>
+            <Row justify={'center'}>
                 <Col span={24}>
                     <label>Angle:</label>
                     <Slider
@@ -153,13 +156,18 @@ const CanvasControls: React.FC = () => {
                 <Col span={3}>
                     <Button onClick={canvasClear}>Clear</Button>
                 </Col>
+                <Col>
+                    <Shapes />
+                </Col>
+                <Col className='ms-2' span={4}>
+                    <ImageAdder />
+                </Col>
                 <Col span={6}>
                     <Button type="primary" onClick={drawingMode}>{!isDrawingMode ? "Enter Drawing Mode" : "Cancel Drawing Mode"}</Button>
                 </Col>
                 {isDrawingMode && (
                     <DrawingMode />
                 )}
-                <Shapes/>
             </Row>
         </>
     );

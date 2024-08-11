@@ -179,7 +179,7 @@ export const addRectangle = (canvas: fabric.Canvas) => {
     const shiftAmount = 10;
 
     const numRectangles = canvas.getObjects('rect').length;
-    
+
     const left = 100 + numRectangles * shiftAmount;
     const top = 50 + numRectangles * shiftAmount;
 
@@ -256,4 +256,43 @@ export const addEllipse = (canvas: fabric.Canvas) => {
     canvas.add(ellipse);
     canvas.setActiveObject(ellipse);
     canvas.requestRenderAll();
+};
+
+export const addImageToCanvas = (
+    canvas: fabric.Canvas,
+    url: string,
+    options: {
+        scaleX?: number;
+        scaleY?: number;
+        flipX?: boolean;
+        flipY?: boolean;
+        left?: number;
+        top?: number;
+        angle?: number;
+        opacity?: number;
+        [key: string]: any;
+    } = {}
+) => {
+    const shiftAmount = 10;
+    const numImages = canvas.getObjects('image').length;
+    const left = 100 + numImages * shiftAmount;
+    const top = 50 + numImages * shiftAmount;
+
+    fabric.Image.fromURL(url, (img) => {
+        img.set({
+            scaleX: options.scaleX || 1,
+            scaleY: options.scaleY || 1,
+            flipX: options.flipX || false,
+            flipY: options.flipY || false,
+            left: options.left || left,
+            top: options.top || top,
+            angle: options.angle || 0,
+            opacity: options.opacity || 1,
+            ...options
+        });
+
+        canvas.add(img);
+        canvas.setActiveObject(img);
+        canvas.requestRenderAll();
+    });
 };
