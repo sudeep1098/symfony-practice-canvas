@@ -7,6 +7,7 @@ import Shapes from './Shapes';
 import ImageAdder from './ImageAdder';
 import TextAdder from './TextAdder';
 import ControlSliders from './ControlSliders';
+import { useCopyPasteHandler } from './CopyPasteHandler';
 
 const CanvasControls: React.FC = () => {
     const canvas = useContext(CanvasContext);
@@ -21,6 +22,8 @@ const CanvasControls: React.FC = () => {
         skewY: 0,
     };
     const [controls, setControls] = useState(defaultControls);
+
+    useCopyPasteHandler(canvas);
 
     const updateControls = useCallback(() => {
         if (canvas instanceof fabric.Canvas) {
@@ -117,7 +120,9 @@ const CanvasControls: React.FC = () => {
                     <TextAdder />
                 </Col>
                 <Col className='mt-3' span={6}>
-                    <Button type="primary" onClick={drawingMode}>{!isDrawingMode ? "Enter Drawing Mode" : "Cancel Drawing Mode"}</Button>
+                    <Button type="primary" onClick={drawingMode}>
+                        {!isDrawingMode ? "Enter Drawing Mode" : "Cancel Drawing Mode"}
+                    </Button>
                 </Col>
                 {isDrawingMode && (
                     <DrawingMode />
