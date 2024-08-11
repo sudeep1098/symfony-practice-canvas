@@ -11,6 +11,8 @@ export const buildControls = (fabric: any) => {
         cornerStyle: 'circle',
         borderDashArray: [3, 3],
         strokeDashArray: [5, 5],
+        // originX: 'center',
+        // originY: 'center',
     });
 
     const deleteImg = new Image();
@@ -24,4 +26,7 @@ export const buildControls = (fabric: any) => {
 
     fabric.Object.prototype.controls.deleteControl = deleteControl;
     fabric.Object.prototype.controls.copyPasteControl = copyPasteControl;
+
+    fabric.Textbox.prototype.controls.deleteControl  = deleteControl;
+    fabric.Textbox.prototype.controls.copyPasteControl  = copyPasteControl;
 };

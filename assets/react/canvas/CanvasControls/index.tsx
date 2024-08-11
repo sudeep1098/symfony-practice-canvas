@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState, useCallback } from 'react';
-import { Slider } from 'antd';
+import { Slider, Button, Col, Row } from 'antd';
 import { fabric } from 'fabric';
 import CanvasContext from '@react/canvas/helper/context';
-import { Col, Row, Button } from 'antd';
 import DrawingMode from './DrawingMode';
 import Shapes from './Shapes';
 import ImageAdder from './ImageAdder';
+import TextAdder from './TextAdder';
 
 const CanvasControls: React.FC = () => {
     const canvas = useContext(CanvasContext);
     const [isDrawingMode, setIsDrawingMode] = useState<boolean>(false);
     const [activeObject, setActiveObject] = useState<fabric.Object | null>(null);
-    const [controls, setControls] = useState({
+    const defaultControls = {
         angle: 0,
         scale: 1,
         top: 0,
         left: 0,
         skewX: 0,
         skewY: 0,
-    });
+    };
+    const [controls, setControls] = useState(defaultControls);
 
     const updateControls = useCallback(() => {
         if (canvas instanceof fabric.Canvas) {
@@ -34,13 +35,13 @@ const CanvasControls: React.FC = () => {
                     skewX: activeObj.skewX || 0,
                     skewY: activeObj.skewY || 0,
                 });
+            } else {
+                setControls(defaultControls);
             }
         }
     }, [canvas]);
 
-    const handleControlChange = (property: any, value: number) => {
-        console.log(canvas._objects, canvas.toJSON(), canvas.toSVG());
-
+    const handleControlChange = (property: keyof fabric.Object, value: number) => {
         if (activeObject && canvas) {
             if (property === 'scale') {
                 activeObject.set({
@@ -58,13 +59,20 @@ const CanvasControls: React.FC = () => {
     const canvasClear = () => {
         if (canvas) {
             canvas.clear();
+            setControls(defaultControls);
         }
     };
+
     const drawingMode = () => {
         if (canvas) {
             canvas.isDrawingMode = !isDrawingMode;
         }
         setIsDrawingMode(!isDrawingMode);
+    }
+
+    const resetControls = () => {
+        setActiveObject(null);
+        setControls(defaultControls);
     }
 
     useEffect(() => {
@@ -75,6 +83,7 @@ const CanvasControls: React.FC = () => {
             canvas.on('object:scaling', updateControls);
             canvas.on('object:rotating', updateControls);
             canvas.on('object:skewing', updateControls);
+            canvas.on('selection:cleared', resetControls);
         }
 
         return () => {
@@ -85,6 +94,7 @@ const CanvasControls: React.FC = () => {
                 canvas.off('object:scaling', updateControls);
                 canvas.off('object:rotating', updateControls);
                 canvas.off('object:skewing', updateControls);
+                canvas.off('selection:cleared', resetControls);
             }
         };
     }, [canvas, updateControls]);
@@ -162,7 +172,10 @@ const CanvasControls: React.FC = () => {
                 <Col className='ms-2' span={4}>
                     <ImageAdder />
                 </Col>
-                <Col span={6}>
+                <Col className='mt-3' span={12}>
+                    <TextAdder />
+                </Col>
+                <Col className='mt-3' span={6}>
                     <Button type="primary" onClick={drawingMode}>{!isDrawingMode ? "Enter Drawing Mode" : "Cancel Drawing Mode"}</Button>
                 </Col>
                 {isDrawingMode && (
