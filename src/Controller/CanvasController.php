@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class CanvasController extends AbstractController
 {
-    #[Route('/canvas', name: 'canvas')]
+    #[Route('/', name: 'canvas')]
     public function index(): Response
     {
         return $this->render('canvas/index.html.twig', [
